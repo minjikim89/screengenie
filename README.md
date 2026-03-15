@@ -48,7 +48,7 @@ https://github.com/user-attachments/assets/demo.mp4
 - **Floating overlay** — Works on top of any Android app using `flutter_overlay_window`
 - **Real AI analysis** — Gemini 2.5 Flash analyzes screenshots and returns precise UI element coordinates
 - **Spotlight guidance** — Dark overlay with circular cutout highlighting the target element
-- **Animated pointer** — Bouncing genie finger pointing to the target
+- **Animated genie** — Floating genie character near the target with speech bubble
 - **Risk classification** — Safety gate warns users before high-risk actions (payments, deletions)
 - **Dual-mode backend** — Direct Gemini SDK call (default) or Cloud Run backend
 
@@ -79,7 +79,7 @@ https://github.com/user-attachments/assets/demo.mp4
 
 ```bash
 # 1. Clone and setup
-git clone https://github.com/user/screengenie.git
+git clone https://github.com/minjikim89/screengenie.git
 cd screengenie
 
 # 2. Add your API key
@@ -92,15 +92,20 @@ echo "GEMINI_API_KEY=your_key_here" > .env
 adb install -r build/app/outputs/flutter-apk/app-debug.apk
 ```
 
-### Cloud Run Deployment (Optional)
+### Cloud Run Backend
+
+The backend is deployed at: `https://screengenie-api-221297690016.us-central1.run.app`
 
 ```bash
-# Requires gcloud CLI
+# Health check
+curl https://screengenie-api-221297690016.us-central1.run.app/health
+
+# Build APK with Cloud Run backend
+CLOUD_RUN_URL=https://screengenie-api-221297690016.us-central1.run.app ./build_debug.sh
+
+# Or deploy your own instance
 export GCP_PROJECT_ID=your-project-id
 ./deploy_cloudrun.sh
-
-# Then build with Cloud Run URL
-CLOUD_RUN_URL=https://screengenie-api-xxx.run.app ./build_debug.sh
 ```
 
 ## Project Structure
